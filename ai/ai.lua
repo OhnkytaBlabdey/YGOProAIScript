@@ -52,10 +52,22 @@ TRASHTALK = true -- some decks might comment their actions. Set to false, if you
 EXTRA_DRAW = 0
 EXTRA_SUMMON = 0
 LP_RECOVER = 0
+--
+-- drct=4
 ob1=0
 ob2=0
 --第二级的数值即对应着循环的（最）小单元 ； 数值于onselectinitcommand时计算更新 ，并 根据此值决定这一步的command 
-
+command=nil
+ num=nil --number 
+ gid=nil
+ ida=nil
+ idb=nil
+ idc=nil
+ seq=nil
+ maxim=nil --maxamount
+ selct=0 --count
+ yesno=nil --trigger
+ --
 PRINT_DRAW = 1 -- for debugging
 
 function requireoptional(module)
@@ -73,15 +85,16 @@ require("ai.mod.DeclareAttribute")
 require("ai.mod.DeclareCard")
 require("ai.mod.DeclareMonsterType")
 require("ai.mod.SelectBattleCommand")
-requireoptional("ai.mod.combo")
-requireoptional("ai.mod.ohnkyta")
-requireoptional("ai.mod.SelectCard8")
+requireoptional("ai.mod.submod")
+requireoptional("combo")
+--requireoptional("ai.mod.ohnkyta")
+requireoptional("ai.mod.SelectCard")
 require("ai.mod.SelectChain")
 require("ai.mod.SelectEffectYesNo")
-requireoptional("ai.mod.object")
-requireoptional("ai.mod.SelectInitCommand8")
-requireoptional("ai.mod.recal")
-requireoptional("ai.mod.cond")
+--requireoptional("ai.mod.object")
+requireoptional("ai.mod.SelectInitCommand")
+--requireoptional("ai.mod.recal")
+--requireoptional("ai.mod.cond")
 require("ai.mod.SelectNumber")
 require("ai.mod.SelectOption")
 require("ai.mod.SelectPosition")
@@ -89,46 +102,46 @@ require("ai.mod.SelectSum")
 require("ai.mod.SelectTribute")
 require("ai.mod.SelectYesNo")
 require("ai.mod.SelectChainOrder")
-require("ai.decks.Generic")
-require("ai.decks.FireFist")
-require("ai.decks.HeraldicBeast")
-require("ai.decks.Gadget")
-require("ai.decks.BLS")
-require("ai.decks.Bujin")
-require("ai.decks.Mermail")
-require("ai.decks.Shaddoll")
-require("ai.decks.Satellarknight")
-require("ai.decks.ChaosDragon")
-require("ai.decks.HAT")
-require("ai.decks.Qliphort")
-require("ai.decks.NobleKnight")
-require("ai.decks.Nekroz")
-require("ai.decks.BurningAbyss")
-require("ai.decks.DarkWorld")
-require("ai.decks.Constellar")
-require("ai.decks.Blackwing")
-require("ai.decks.Harpie")
-require("ai.decks.HERO")
-require("ai.decks.ExodiaLib")
-require("ai.decks.Boxer")
-require("ai.decks.Monarch")
-require("ai.decks.MegaMonarch")
-require("ai.decks.Kozmo")
-require("ai.decks.Lightsworn")
-require("ai.decks.DDD")
-require("ai.decks.GladBeast")
-require("ai.decks.ABC")
-require("ai.decks.Raidraptor")
-require("ai.decks.Eidolon")
+-- require("ai.decks.Generic")
+-- require("ai.decks.FireFist")
+-- require("ai.decks.HeraldicBeast")
+-- require("ai.decks.Gadget")
+-- require("ai.decks.BLS")
+-- require("ai.decks.Bujin")
+-- require("ai.decks.Mermail")
+-- require("ai.decks.Shaddoll")
+-- require("ai.decks.Satellarknight")
+-- require("ai.decks.ChaosDragon")
+-- require("ai.decks.HAT")
+-- require("ai.decks.Qliphort")
+-- require("ai.decks.NobleKnight")
+-- require("ai.decks.Nekroz")
+-- require("ai.decks.BurningAbyss")
+-- require("ai.decks.DarkWorld")
+-- require("ai.decks.Constellar")
+-- require("ai.decks.Blackwing")
+-- require("ai.decks.Harpie")
+-- require("ai.decks.HERO")
+-- require("ai.decks.ExodiaLib")
+-- require("ai.decks.Boxer")
+-- require("ai.decks.Monarch")
+-- require("ai.decks.MegaMonarch")
+-- require("ai.decks.Kozmo")
+-- require("ai.decks.Lightsworn")
+-- require("ai.decks.DDD")
+-- require("ai.decks.GladBeast")
+-- require("ai.decks.ABC")
+-- require("ai.decks.Raidraptor")
+-- require("ai.decks.Eidolon")
 
-requireoptional("ai.decks.ZodiacBeast")
-requireoptional("ai.decks.Fluffal")
-requireoptional("ai.decks.Majespecter")
-requireoptional("ai.decks.Spellbook")
-requireoptional("ai.decks.X-Saber")
-requireoptional("ai.decks.Cth")
-requireoptional("ai.decks.Wizard")
-requireoptional("ai.decks.Express")
+-- requireoptional("ai.decks.ZodiacBeast")
+-- requireoptional("ai.decks.Fluffal")
+-- requireoptional("ai.decks.Majespecter")
+-- requireoptional("ai.decks.Spellbook")
+-- requireoptional("ai.decks.X-Saber")
+-- requireoptional("ai.decks.Cth")
+-- requireoptional("ai.decks.Wizard")
+-- requireoptional("ai.decks.Express")
 
 math.randomseed( require("os").time() )
 

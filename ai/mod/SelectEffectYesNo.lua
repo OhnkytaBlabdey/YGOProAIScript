@@ -12,6 +12,49 @@
 function OnSelectEffectYesNo(id,triggeringCard)
   if not player_ai then player_ai = 1 end -- probably puzzle mode, so player goes first
   local result = nil
+
+AI.Chat("OnSelectEffectYesNo id is : ".. id )
+print("OnSelectEffectYesNo id is : ".. id )
+
+if combo then
+ AI.Chat("Now OnSelectEffectYesNo is : " .. ob1 .. " - ".. ob2 )
+ print("Now OnSelectEffectYesNo is : " .. ob1 .. " - ".. ob2 )
+ reca()
+ AI.Chat("Now OnSelectEffectYesNo comes to : " .. ob1 .. " - ".. ob2 )
+ print("Now OnSelectEffectYesNo comes to : " .. ob1 .. " - ".. ob2 )
+ command=nil
+ gid=nil
+ ida=nil
+ idb=nil
+ idc=nil
+ ids=nil
+ seq=nil
+ maxim=nil 
+ selct=0 
+ yesno=nil
+ 
+ obob()
+ if not yesno then
+  print('\n'.."NOT TRIGGER "..'\n' )
+  preindi()
+  return 0
+ end
+ 
+ if id == ida and yesno then 
+  AI.Chat("return 1")
+  print("return 1")
+  return 1
+ end 
+AI.Chat("return 0")
+print("return 0")
+return 0
+end
+
+----
+  
+  
+  
+  
   if not InfiniteLoopCheck(triggeringCard) then
     return 0
   end

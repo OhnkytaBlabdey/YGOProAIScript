@@ -8,7 +8,24 @@
 --
 -- Return: index of the selected choice
 function OnSelectNumber(choices)
+print("OnSelectNumber")
+AI.Chat("OnSelectNumber")
   local result = nil
+  for i=1,#choices do
+   print(choices[i])
+  end
+  if combo and num then 
+   for i=1,#choices do 
+    if choices[i]==num then
+     return i
+	 end
+   end
+  end
+  
+  
+  ------------
+  
+  
   -------------------------------------------
   -- The AI should always try to mill as many
   -- cards as possible with Card Trooper.

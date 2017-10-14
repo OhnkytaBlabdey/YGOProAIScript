@@ -14,6 +14,45 @@
 
 GlobalChain = 0
 function OnSelectChain(cards,only_chains_by_player,forced)
+print("OnSelectChain")
+if #cards==0 then return 0,0 end
+-- if somewhen ai can chain , this will bug...
+for i=1,#cards do
+ print(i .. " card OnSelectChain is : " .. cards[i].id )
+end
+ AI.Chat("Now OnSelectChain is : " .. ob1  .." - ".. ob2 )
+ print("Now OnSelectChain is : " .. ob1  .." - ".. ob2 )
+ reca()
+ AI.Chat("Now OnSelectChain comes to : " .. ob1 .." - "..  ob2 )
+ print("Now OnSelectChain comes to : " .. ob1 .." - "..  ob2 )
+ command=nil
+ gid=nil
+ ida=nil
+ idb=nil
+ idc=nil
+ seq=nil
+ maxim=nil 
+ selct=0 
+ yesno=nil
+ 
+ obob()
+
+  if not yesno then
+  print( '\n'.."NOT CHAIN and pre()..."..'\n' )
+  preindi()
+  return 0,0
+  end
+
+ if not command and yesno and ida then 
+  for i=1,#cards do 
+   if cards[i].id==ida then 
+    GlobalActivatedCardID = cards[i].id
+    return 1,i
+   end
+  end
+ end
+ ------
+
   if not player_ai then player_ai = 1 end -- probably puzzle mode, so player goes first
   if GlobalBPAllowed == nil and Duel.GetTurnCount()>1 then
     GlobalBPAllowed = true

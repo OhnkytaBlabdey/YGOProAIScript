@@ -9,6 +9,18 @@
 -- result = table containing card indices
 
 function OnSelectChainOrder(cards)
+print("OnSelectChainOrder: " .. #cards )
+AI.Chat("OnSelectChainOrder: " .. #cards )
+	for i=1,#cards do
+		print(cards[i].id)
+		AI.Chat(cards[i].id)
+	end
+
+
+
+
+----
+
 	local result = {}
 	local d = DeckCheck()
   if d and d.ChainOrder then
